@@ -1,0 +1,79 @@
+openapi: 3.0.0
+info:
+  title: Task API
+  version: 1.0.0
+  description: A simple API for managing tasks
+paths:
+  /tasks:
+    post:
+      summary: Create a new task
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+      responses:
+        201:
+          description: Task created
+    get:
+      summary: Retrieve all tasks
+      responses:
+        200:
+          description: List of tasks
+  /tasks/{task_id}:
+    get:
+      summary: Retrieve a specific task
+      parameters:
+        - in: path
+          name: task_id
+          schema:
+            type: integer
+          required: true
+      responses:
+        200:
+          description: Task retrieved
+        404:
+          description: Task not found
+    put:
+      summary: Update a task
+      parameters:
+        - in: path
+          name: task_id
+          schema:
+            type: integer
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+                done:
+                  type: boolean
+      responses:
+        200:
+          description: Task updated
+        404:
+          description: Task not found
+    delete:
+      summary: Delete a task
+      parameters:
+        - in: path
+          name: task_id
+          schema:
+            type: integer
+          required: true
+      responses:
+        200:
+          description: Task deleted
